@@ -1,30 +1,33 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 
 
 
-const Nav = () => {
+
+const Nav = props => {
+
+
 
   return (
 
-    <nav class="main-nav">
-      <ul>
-        <li><a href='#'>Cats</a></li>
-        <li><a href='#'>Dogs</a></li>
-        <li><a href='#'>Computers</a></li>
+    <nav className="main-nav">
+      <ul onClick={(e) => {
+        if(e.target.tagName === 'A'){
+
+          props.preset(e.target.textContent.toLowerCase());
+        }
+
+
+      }}>
+        <li><NavLink to='/cats'>Cats</NavLink></li>
+        <li><NavLink to='/dogs'>Dogs</NavLink></li>
+        <li><NavLink to='/birds'>Birds</NavLink></li>
       </ul>
     </nav>
 
-
-
   );
 
-
-
-
 }
-
-
-
 
 export default Nav;
