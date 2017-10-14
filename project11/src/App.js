@@ -4,7 +4,7 @@ import axios from 'axios';
 import './App.css';
 import Form from './components/Form';
 import Nav from './components/Nav';
-import Cats from './components/Cats';
+import Container from './components/Container';
 import Home from './components/Home';
 import Pics from './components/Pics';
 import Heading from './components/Heading';
@@ -32,7 +32,8 @@ class App extends Component {
   }
 
   performSearch = (term = 'frogs') => {
-    axios.get(`http://api.giphy.com/v1/gifs/search?q=${term}&limit=24&api_key=dc6zaTOxFJmzC`)
+
+    axios.get(`http://api.giphy.com/v1/gifs/search?q=${term}&limit=2&api_key=dc6zaTOxFJmzC`)
       .then(response => {
         this.setState({
           pics: response.data.data,
@@ -47,38 +48,33 @@ class App extends Component {
 
   }
 
-  // componentWillReceiveProps(term){
-  //
-  //   this.performSearch(term);
-  //
-  // }
+
 
 
 // <Route exact path="/teachers" component={Teachers}/>
 // <Route path="/teachers/:topic/:name" component={Featured}/>
 // <Route path="/courses" component={Courses}/>
+// <Route exact path="/" render={() => <Home loading={this.state.loading} pics={this.state.pics}/>}/>
 
   render() {
+
     return (
 
       <BrowserRouter>
         <div className="container">
-          <Form onSearch={this.performSearch}/>
+
           <Nav preset={this.performSearch}/>
           <Heading subject={this.state.term} />
           <Switch>
-            <Route exact path="/" render={() => <Home loading={this.state.loading} pics={this.state.pics}/>}/>
-            <Route path="/cats" render={() => <Cats loading={this.state.loading} pics={this.state.pics}/>}/>
-
+            <Route exact path="/" render={() => <Container term={this.state.term} loading={this.state.loading} pics={this.state.pics}/>}/>
+            <Route path="/cats" render={() => <Container term={this.state.term} loading={this.state.loading} pics={this.state.pics}/>}/>
+            <Route path="/dogs" render={() => <Container term={this.state.term} loading={this.state.loading} pics={this.state.pics}/>}/>
+            <Route path="/birds" render={() => <Container term={this.state.term} loading={this.state.loading} pics={this.state.pics}/>}/>
+            <Route path="/search" render={() => <Form onSearch={this.performSearch}/>}/>
             <Route component={NoResults}/>
           </Switch>
         </div>
       </BrowserRouter>
-
-
-
-
-
 
 
     );
