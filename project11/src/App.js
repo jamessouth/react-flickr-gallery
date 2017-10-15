@@ -4,7 +4,7 @@ import axios from 'axios';
 import './App.css';
 import Form from './components/Form';
 import Nav from './components/Nav';
-import Container from './components/Container';
+import Presentation from './components/Presentation';
 import Home from './components/Home';
 import Pics from './components/Pics';
 import Heading from './components/Heading';
@@ -12,26 +12,31 @@ import NoResults from './components/NoResults';
 
 
 
-class App extends Component {
+export default class App extends Component {
 
-  state = {
+    constructor() {
+      super();
+      this.state = {
+        pics: [],
+        loading: true,
+        term: ''
 
-    pics: [],
-    loading: true,
-    term: ''
-
-
-  }
-
+      };
+    }
 
 
 
 
   componentDidMount(){
+    let path = window.location.pathname.slice(1);
+    if(path){
+      this.performSearch(path);
+    } else {
     this.performSearch();
   }
+  }
 
-  performSearch = (term = 'frogs') => {
+  performSearch = (term = 'cats') => {
 
     axios.get(`http://api.giphy.com/v1/gifs/search?q=${term}&limit=2&api_key=dc6zaTOxFJmzC`)
       .then(response => {
@@ -55,6 +60,8 @@ class App extends Component {
 // <Route path="/teachers/:topic/:name" component={Featured}/>
 // <Route path="/courses" component={Courses}/>
 // <Route exact path="/" render={() => <Home loading={this.state.loading} pics={this.state.pics}/>}/>
+  // <Route path="/search" render={() => }/>
+// term={this.state.term} loading={this.state.loading} pics={this.state.pics}
 
   render() {
 
@@ -62,15 +69,16 @@ class App extends Component {
 
       <BrowserRouter>
         <div className="container">
-
+          <Form onSearch={this.performSearch}/>
           <Nav preset={this.performSearch}/>
           <Heading subject={this.state.term} />
           <Switch>
-            <Route exact path="/" render={() => <Container term={this.state.term} loading={this.state.loading} pics={this.state.pics}/>}/>
-            <Route path="/cats" render={() => <Container term={this.state.term} loading={this.state.loading} pics={this.state.pics}/>}/>
-            <Route path="/dogs" render={() => <Container term={this.state.term} loading={this.state.loading} pics={this.state.pics}/>}/>
-            <Route path="/birds" render={() => <Container term={this.state.term} loading={this.state.loading} pics={this.state.pics}/>}/>
-            <Route path="/search" render={() => <Form onSearch={this.performSearch}/>}/>
+            <Route exact path="/" render={props => <Presentation props={props} prop={this.state}/>}/>
+            <Route path="/cats" render={props => <Presentation props={props} prop={this.state}/>}/>
+            <Route path="/dogs" render={props => <Presentation props={props} prop={this.state}/>}/>
+            <Route path="/birds" render={props => <Presentation props={props} prop={this.state}/>}/>
+
+
             <Route component={NoResults}/>
           </Switch>
         </div>
@@ -80,5 +88,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
