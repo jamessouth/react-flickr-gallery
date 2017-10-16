@@ -4,7 +4,7 @@ const Heading = props => {
 
   return (
 
-    <h2>{props.subject} pics</h2>
+    <h2>{props.subject || 'cats'} pics</h2>
   );
 
 
