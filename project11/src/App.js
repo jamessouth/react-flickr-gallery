@@ -11,6 +11,8 @@ import Pics from './components/Pics';
 import Heading from './components/Heading';
 import NoResults from './components/NoResults';
 
+
+
 const App = () => {
 
 
@@ -24,7 +26,7 @@ const App = () => {
             <Route path="/cats" component={Container}/>
             <Route path="/dogs" component={Container}/>
             <Route path="/birds" component={Container}/>
-            <Route path="/results" component={Container}/>
+            <Route path="/search" component={Container}/>
 
             <Route component={NoResults}/>
           </Switch>

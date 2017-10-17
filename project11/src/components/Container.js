@@ -10,26 +10,27 @@ import Pics from './Pics';
 import Heading from './Heading';
 import NoResults from './NoResults';
 
-let cnt = 0;
+
 export default class Container extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       pics: [],
-      loading: null,
-      searchTerms: []
+      loading: null
     };
   }
 
 
   componentDidMount(){
-    console.log('called');
+
     let path = this.props.match.path.slice(1);
-    if(path){
+    if(path && path !== 'search'){
       this.performSearch(path);
+
     } else {
     this.performSearch();
+
   }
   }
 
@@ -37,37 +38,21 @@ export default class Container extends Component {
   componentWillReceiveProps(nextProps){
 
 
-
-
-    console.log('called');
     let oldPath = this.props.match.path.slice(1);
     let newPath = nextProps.match.path.slice(1);
-    console.log(oldPath);
-    console.log(newPath);
-    if(oldPath !== newPath && newPath !== 'results'){
-      console.log('change');
+
+    if(oldPath !== newPath && newPath !== 'search'){
+
       this.performSearch(newPath || 'cats');
 
     }
 
 
   }
-// cache search results???
+
 
   performSearch = (term = 'cats') => {
-
-    if(!['cats', 'dogs', 'birds', 'results'].includes(term)){
-
-      this.setState({searchTerms: [...this.state.searchTerms, `${cnt}${term}`]});
-      cnt++;
-    }
-
-    if(this.props.match.path.slice(1) === 'results'){
-      console.log('HERERERERE');
-    }
-
-
-
+console.log('hey');
     this.setState({loading: true});
     axios.get(`http://api.giphy.com/v1/gifs/search?q=${term}&limit=2&api_key=dc6zaTOxFJmzC`)
       .then(response => {
@@ -87,13 +72,14 @@ export default class Container extends Component {
 
   render() {
 
-console.log(this.state.searchTerms);
-console.log(this.props.match);
+
     return (
 
 
 <div>
-          <Form props={this.props} onSearch={this.performSearch}/>
+          {this.props.match.path === '/search' &&
+            <Form props={this.props} onSearch={this.performSearch}/>
+          }
           <Nav preset={this.performSearch}/>
           <Heading subject={this.props.match.path.slice(1)} />
           <Presentation pics={this.state}/>
