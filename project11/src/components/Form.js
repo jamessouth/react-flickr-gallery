@@ -15,9 +15,9 @@ export default class Form extends Component {
   handleSubmit = e => {
     let subject = this.term.value;
     e.preventDefault();
-    this.props.onSearch(subject);
+    this.props.onSearch(subject, true);
     e.currentTarget.reset();
-    
+
   }
 
 render(){

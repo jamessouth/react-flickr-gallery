@@ -17,7 +17,8 @@ export default class Container extends Component {
     super(props);
     this.state = {
       pics: [],
-      loading: null
+      loading: null,
+      searchedYet: false
     };
   }
 
@@ -44,17 +45,20 @@ export default class Container extends Component {
     if(oldPath !== newPath && newPath !== 'search'){
 
       this.performSearch(newPath || 'cats');
-
+      this.setState({searchedYet : false})
     }
 
 
   }
 
 
-  performSearch = (term = 'cats') => {
-console.log('hey');
-    this.setState({loading: true});
-    axios.get(`http://api.giphy.com/v1/gifs/search?q=${term}&limit=2&api_key=dc6zaTOxFJmzC`)
+  performSearch = (term = 'cats', searched = false) => {
+
+    searched ? this.setState({searchedYet : true}) : {};
+
+
+    this.setState({loading : true});
+    axios.get(`http://api.giphy.com/v1/gifs/search?q=${term}&limit=24&api_key=dc6zaTOxFJmzC`)
       .then(response => {
         this.setState({
           pics: response.data.data,
@@ -64,6 +68,7 @@ console.log('hey');
       .catch(error => {
         console.log('Error fetching and parsing data', error);
       });
+
 
   }
 
@@ -82,7 +87,7 @@ console.log('hey');
           }
           <Nav preset={this.performSearch}/>
           <Heading subject={this.props.match.path.slice(1)} />
-          <Presentation pics={this.state}/>
+          <Presentation props={this.props} pics={this.state}/>
 </div>
 
 
