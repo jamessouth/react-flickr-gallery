@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Heading = props => {
 
-  return (
+  let topic = props.subject;
+  if(topic === ''){
+    topic = 'cats';
+  }
 
-    <h2>{props.subject || 'cats'} pics</h2>
-  );
-
+    return (
+      <h2>{topic !== 'search' ? `${topic} pics` : props.searched[1] && props.searched[0] > 0 ? 'Results' : ''}</h2>
+    );
 
 }
 export default Heading;
