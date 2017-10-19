@@ -1,38 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import axios from 'axios';
 import './App.css';
-import Form from './components/Form';
-import Nav from './components/Nav';
-import Presentation from './components/Presentation';
-import Home from './components/Home';
+import ErrorPage from './components/ErrorPage';
 import Container from './components/Container';
-import Pics from './components/Pics';
-import Heading from './components/Heading';
-import NoResults from './components/NoResults';
-
-
 
 const App = () => {
-
 
     return (
 
       <BrowserRouter>
         <div className="container">
-
           <Switch>
             <Route exact path="/" component={Container}/>
             <Route path="/cats" component={Container}/>
             <Route path="/dogs" component={Container}/>
             <Route path="/birds" component={Container}/>
             <Route path="/search" component={Container}/>
-
-            <Route component={NoResults}/>
+            <Route component={ErrorPage}/>
           </Switch>
         </div>
       </BrowserRouter>
-
 
     );
 
