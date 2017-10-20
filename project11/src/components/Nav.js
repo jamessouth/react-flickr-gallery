@@ -7,9 +7,9 @@ const Nav = props => {
 
     <nav className="main-nav">
       <ul>
-        <li><NavLink to='/cats'>Cats</NavLink></li>
-        <li><NavLink to='/dogs'>Dogs</NavLink></li>
-        <li><NavLink to='/birds'>Birds</NavLink></li>
+        <li><NavLink to='/mountains'>Mountains</NavLink></li>
+        <li><NavLink to='/rivers'>Rivers</NavLink></li>
+        <li><NavLink to='/valleys'>Valleys</NavLink></li>
         <li><NavLink to='/search'>Search</NavLink></li>
       </ul>
     </nav>

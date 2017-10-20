@@ -8,7 +8,7 @@ const Pics = props => {
     let pics;
     let resultsClass;
     if(results.length > 0){
-      pics = results.map(pic => <Pic key={pic.id} url={pic.images.fixed_height.url}/>);
+      pics = results.map(pic => <Pic key={pic.id} url={`https://farm${pic.farm}.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_n.jpg`}/>);
       resultsClass = "pic-list";
     } else {
       pics = <NoResults />

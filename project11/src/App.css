@@ -9,6 +9,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #3f4850;
   padding-top: 2em;
+  padding-bottom: 4em;
 }
 h2 {
   font-size: 2em;
@@ -53,10 +54,13 @@ input {
 li.pic-wrap{
   height: 165px;
   width: 220px;
+  overflow: hidden;
 }
 img{
   height: 100%;
   width: 100%;
+  /*transform: scale(1.25);
+  transition: transform 1.25s;*/
 }
 .main-nav ul {
   display: flex;
@@ -84,14 +88,10 @@ img{
 
 
 
-.photo-container ul img {
-  width: 100%;
-  transform: scale(1.25);
-  transition: transform 1.25s;
-}
-.photo-container li:hover img {
+
+/*.pic-list li:hover img{
   transform: scale(1.65);
-}
+}*/
 
 
 
