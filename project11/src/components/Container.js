@@ -5,6 +5,7 @@ import Form from './Form';
 import Nav from './Nav';
 import Presentation from './Presentation';
 import Heading from './Heading';
+import apiKey from './Config';
 
 export default class Container extends Component {
 
@@ -31,20 +32,21 @@ export default class Container extends Component {
     let oldPath = this.props.match.path.slice(1);
     let newPath = nextProps.match.path.slice(1);
     if(oldPath !== newPath && newPath !== 'search'){
-      this.performSearch(newPath || 'cats');
+      this.performSearch(newPath || 'mountains');
       this.setState({searchedYet : false})
     }
   }
 
-  performSearch = (term = 'cats', searched = false) => {
+  performSearch = (term = 'mountains', searched = false) => {
+    let num =  Math.floor(Math.random() * 200) + 1;
     if(searched){
        this.setState({searchedYet : true});
      }
     this.setState({loading : true});
-    axios.get(`http://api.giphy.com/v1/gifs/search?q=${term}&limit=24&api_key=dc6zaTOxFJmzC`)
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${term}&per_page=24&page=${num}&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
-          pics: response.data.data,
+          pics: response.data.photos.photo,
           loading: false
         })
       })

@@ -2,9 +2,9 @@ import React from 'react';
 
 const Heading = props => {
 
-  let topic = props.subject;
+  let topic = props.subject.replace(/s$/, '');
   if(topic === ''){
-    topic = 'cats';
+    topic = 'mountain';
   }
 
     return (
