@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-
+// stateful component to hold search field
 export default class Form extends Component {
-
+// state is for updating the value of the input element
   state = {
     searchText: ''
   }
-
+// updates input
   onSearchChange = e => {
     this.setState({ searchText: e.target.value });
   }
-
+// send input value up to container to execute search
   handleSubmit = e => {
     let subject = this.term.value;
     e.preventDefault();
     this.props.onSearch(subject, true);
     e.currentTarget.reset();
   }
-
+// render input and search button 
 render(){
     return (
       <form onSubmit={this.handleSubmit} className="search-form">
