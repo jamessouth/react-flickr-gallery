@@ -1,5 +1,5 @@
 import React from 'react';
-
+// stateless functional component to display a heading: the preset button topics via props, nothing prior to executing a search, and 'results' after a search
 const Heading = props => {
 
   let topic = props.subject.replace(/s$/, '');

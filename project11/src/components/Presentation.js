@@ -1,8 +1,8 @@
 import React from 'react';
 import Pics from './Pics';
-
+// stateless functional component that holds the pictures
 const Presentation = props => {
-
+// if path is not search, display loading indicator then the pics. if path is search, if we have not searched yet, display nothing, else display loading indicator then the pics.
     return (
       <div>
         {props.props.match.path !== '/search'?

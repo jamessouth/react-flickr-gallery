@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-
+// stateless functional component to display navigation buttons: 3 preset topics and a link to the search form
 const Nav = props => {
 
   return (

@@ -7,8 +7,10 @@ import Presentation from './Presentation';
 import Heading from './Heading';
 import apiKey from './Config';
 
-export default class Container extends Component {
+// mid-level stateful component holds page elements, gets the photos and passes them down via props
 
+export default class Container extends Component {
+// state has the photos, load status, and search field status to control the content of the heading
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +19,7 @@ export default class Container extends Component {
       searchedYet: false
     };
   }
-
+// lifecycle method to get data when app loads
   componentDidMount(){
     let path = this.props.match.path.slice(1);
     if(path && path !== 'search'){
@@ -27,7 +29,7 @@ export default class Container extends Component {
       this.performSearch();
     }
   }
-
+// lifecycle method gets new data when route changes
   componentWillReceiveProps(nextProps){
     let oldPath = this.props.match.path.slice(1);
     let newPath = nextProps.match.path.slice(1);
@@ -36,7 +38,7 @@ export default class Container extends Component {
       this.setState({searchedYet : false})
     }
   }
-
+// api call to flickr
   performSearch = (term = 'mountains', searched = false) => {
     let num =  Math.floor(Math.random() * 200) + 1;
     if(searched){
@@ -54,7 +56,7 @@ export default class Container extends Component {
         console.log('Error fetching and parsing data', error);
       });
   }
-
+// render page elements, search field only shown on search route
   render() {
 
     return (

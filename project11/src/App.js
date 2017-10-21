@@ -4,6 +4,8 @@ import './App.css';
 import ErrorPage from './components/ErrorPage';
 import Container from './components/Container';
 
+// hi-level stateless component to hold routes and pass them down via props
+
 
 const App = () => {
 
