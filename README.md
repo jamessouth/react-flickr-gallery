@@ -22,6 +22,11 @@ you can get a key [here](https://www.flickr.com/services/apps/create/)
 
 you can put it in a separate file called Config.js like I have and import it to Container.js, or just use it directly in Container.js.  It goes in the query string of the GET request made therein.
 
+the Config.js file looks like this:
+
+`const apiKey = 'your key here';
+export default apiKey;`
+
 once your key is in place you will be good to go! restart the server if necessary.
 
 
